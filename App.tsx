@@ -777,6 +777,7 @@ const UpgradeAccountPage: React.FC = () => {
 
   const [view, setView] = useState<'selection' | 'details' | 'loading' | 'success' | 'bonus_info'>('selection');
   const [selectedLevel, setSelectedLevel] = useState<{name: string, price: string} | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [confirmError, setConfirmError] = useState('');
@@ -799,7 +800,17 @@ const UpgradeAccountPage: React.FC = () => {
     setView('details');
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
   const handleConfirm = () => {
+    if (!selectedFile) {
+      setConfirmError('Please upload your payment receipt first.');
+      return;
+    }
     setConfirmLoading(true);
     setConfirmError('');
     setTimeout(() => {
@@ -872,53 +883,91 @@ const UpgradeAccountPage: React.FC = () => {
           <h1 className="text-lg font-bold">Upgrade Confirmation</h1>
         </div>
 
-        <div className="space-y-6">
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
-            <h3 className="text-sm font-bold text-gray-800 mb-4 dark:text-white flex items-center">
-              <span className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-[10px] mr-2">1</span>
-              Step One: Complete Payment
-            </h3>
-            <p className="text-xs text-gray-500 mb-6 dark:text-gray-400">
-              Click the button below to proceed to our secure payment gateway and complete your {selectedLevel?.price} payment for {selectedLevel?.name} upgrade.
-            </p>
-            <button 
-              onClick={() => window.open("https://checkout.nomba.com/payment-link/8400825697", "_blank")}
-              className="w-full h-14 bg-purple-600 text-white rounded-2xl text-base font-bold shadow-lg active:scale-95 transition-all flex items-center justify-center space-x-2"
-            >
-              <span>Pay Now</span>
-              <i className="fas fa-external-link-alt text-xs"></i>
-            </button>
-          </div>
-
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
-            <h3 className="text-sm font-bold text-gray-800 mb-4 dark:text-white flex items-center">
-              <span className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-[10px] mr-2">2</span>
-              Step Two: Confirm Payment
-            </h3>
-            <p className="text-xs text-gray-500 mb-6 dark:text-gray-400">
-              After completing your payment, click the button below to verify and activate your upgrade.
-            </p>
-            
-            {confirmError && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-100 text-red-600 rounded-xl text-[10px] font-bold animate-shake">
-                <i className="fas fa-exclamation-circle mr-2"></i>
-                {confirmError}
+          <div className="space-y-6">
+            <div className="bg-purple-50 p-6 rounded-[2rem] border border-purple-100 mb-2 dark:bg-gray-800/50 dark:border-purple-900/30">
+              <p className="text-[10px] font-bold text-purple-600 mb-4 uppercase tracking-widest dark:text-purple-400">Transfer to the details below:</p>
+              
+              <div className="space-y-6">
+                <div>
+                  <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
+                  <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
+                    6686035445
+                    <button onClick={() => {navigator.clipboard.writeText('6686035445'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Name</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">OHI AYO ABDULSALAM</p>
+                </div>
+                <div>
+                  <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Moniepoint</p>
+                </div>
               </div>
-            )}
+            </div>
 
-            <button 
-              onClick={handleConfirm}
-              disabled={confirmLoading}
-              className="w-full h-14 bg-black text-white rounded-2xl text-base font-bold shadow-lg active:scale-95 transition-all flex items-center justify-center disabled:opacity-70"
-            >
-              {confirmLoading ? (
-                <i className="fas fa-circle-notch animate-spin"></i>
-              ) : (
-                'Confirm Payment'
+            <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+              <h3 className="text-sm font-bold text-gray-800 mb-4 dark:text-white flex items-center">
+                <span className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-[10px] mr-2">1</span>
+                Upload Payment Receipt
+              </h3>
+              <div className="relative group">
+                <input 
+                  type="file" 
+                  accept="image/*,.pdf"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                  onChange={handleFileChange}
+                />
+                <div className={`w-full h-32 border-2 border-dashed rounded-3xl flex flex-col items-center justify-center transition-all ${
+                  selectedFile ? 'border-green-400 bg-green-50 dark:bg-green-900/20' : 'border-gray-200 bg-gray-50 dark:bg-gray-700/50 dark:border-gray-600'
+                }`}>
+                  {selectedFile ? (
+                    <>
+                      <i className="fas fa-check-circle text-green-500 text-3xl mb-2"></i>
+                      <p className="text-xs font-bold text-green-700 uppercase px-4 truncate max-w-full dark:text-green-400">
+                        {selectedFile.name} Attached
+                      </p>
+                      <button onClick={(e) => {e.preventDefault(); setSelectedFile(null);}} className="text-[10px] mt-2 text-red-500 font-bold uppercase hover:underline">Remove</button>
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-cloud-upload-alt text-gray-300 text-3xl mb-2"></i>
+                      <p className="text-xs font-bold text-gray-400 uppercase">Click to browse file</p>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+              <h3 className="text-sm font-bold text-gray-800 mb-4 dark:text-white flex items-center">
+                <span className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-[10px] mr-2">2</span>
+                Confirm Payment
+              </h3>
+              <p className="text-xs text-gray-500 mb-6 dark:text-gray-400">
+                After completing your payment and uploading the receipt, click the button below to verify and activate your upgrade.
+              </p>
+              
+              {confirmError && (
+                <div className="mb-4 p-3 bg-red-50 border border-red-100 text-red-600 rounded-xl text-[10px] font-bold animate-shake">
+                  <i className="fas fa-exclamation-circle mr-2"></i>
+                  {confirmError}
+                </div>
               )}
-            </button>
+
+              <button 
+                onClick={handleConfirm}
+                disabled={confirmLoading}
+                className="w-full h-14 bg-black text-white rounded-2xl text-base font-bold shadow-lg active:scale-95 transition-all flex items-center justify-center disabled:opacity-70"
+              >
+                {confirmLoading ? (
+                  <i className="fas fa-circle-notch animate-spin"></i>
+                ) : (
+                  'Confirm Payment'
+                )}
+              </button>
+            </div>
           </div>
-        </div>
 
         <p className="text-center text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-10">PayGo Financial Services LTD</p>
       </div>
@@ -978,9 +1027,16 @@ const BuyPayIdPage: React.FC = () => {
   const email = location.state?.email || "";
   
   const [view, setView] = useState<'form' | 'loading' | 'details'>('form');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [confirmError, setConfirmError] = useState('');
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
@@ -998,6 +1054,10 @@ const BuyPayIdPage: React.FC = () => {
   };
 
   const handleConfirm = () => {
+    if (!selectedFile) {
+      setConfirmError('Please upload your payment receipt first.');
+      return;
+    }
     setConfirmLoading(true);
     setConfirmError('');
     setTimeout(() => {
@@ -1046,30 +1106,68 @@ const BuyPayIdPage: React.FC = () => {
         </div>
 
         <div className="space-y-6">
+          <div className="bg-purple-50 p-6 rounded-[2rem] border border-purple-100 mb-2 dark:bg-gray-800/50 dark:border-purple-900/30">
+            <p className="text-[10px] font-bold text-purple-600 mb-4 uppercase tracking-widest dark:text-purple-400">Transfer to the details below:</p>
+            
+            <div className="space-y-6">
+              <div>
+                <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
+                <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
+                  6686035445
+                  <button onClick={() => {navigator.clipboard.writeText('6686035445'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                </p>
+              </div>
+              <div>
+                <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Name</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">OHI AYO ABDULSALAM</p>
+              </div>
+              <div>
+                <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Moniepoint</p>
+              </div>
+            </div>
+          </div>
+
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
             <h3 className="text-sm font-bold text-gray-800 mb-4 dark:text-white flex items-center">
               <span className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-[10px] mr-2">1</span>
-              Step One: Complete Payment
+              Upload Payment Receipt
             </h3>
-            <p className="text-xs text-gray-500 mb-6 dark:text-gray-400">
-              Click the button below to proceed to our secure payment gateway and complete your ₦6,500 payment.
-            </p>
-            <button 
-              onClick={() => window.open("https://checkout.nomba.com/payment-link/6265315397", "_blank")}
-              className="w-full h-14 bg-purple-600 text-white rounded-2xl text-base font-bold shadow-lg active:scale-95 transition-all flex items-center justify-center space-x-2"
-            >
-              <span>Pay Now</span>
-              <i className="fas fa-external-link-alt text-xs"></i>
-            </button>
+            <div className="relative group">
+              <input 
+                type="file" 
+                accept="image/*,.pdf"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                onChange={handleFileChange}
+              />
+              <div className={`w-full h-32 border-2 border-dashed rounded-3xl flex flex-col items-center justify-center transition-all ${
+                selectedFile ? 'border-green-400 bg-green-50 dark:bg-green-900/20' : 'border-gray-200 bg-gray-50 dark:bg-gray-700/50 dark:border-gray-600'
+              }`}>
+                {selectedFile ? (
+                  <>
+                    <i className="fas fa-check-circle text-green-500 text-3xl mb-2"></i>
+                    <p className="text-xs font-bold text-green-700 uppercase px-4 truncate max-w-full dark:text-green-400">
+                      {selectedFile.name} Attached
+                    </p>
+                    <button onClick={(e) => {e.preventDefault(); setSelectedFile(null);}} className="text-[10px] mt-2 text-red-500 font-bold uppercase hover:underline">Remove</button>
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-cloud-upload-alt text-gray-300 text-3xl mb-2"></i>
+                    <p className="text-xs font-bold text-gray-400 uppercase">Click to browse file</p>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
             <h3 className="text-sm font-bold text-gray-800 mb-4 dark:text-white flex items-center">
               <span className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-[10px] mr-2">2</span>
-              Step Two: Confirm Payment
+              Confirm Payment
             </h3>
             <p className="text-xs text-gray-500 mb-6 dark:text-gray-400">
-              After completing your payment, click the button below to verify and activate your PAY ID.
+              After completing your payment and uploading the receipt, click the button below to verify and activate your PAY ID.
             </p>
             
             {confirmError && (
