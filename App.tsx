@@ -1797,32 +1797,63 @@ const LoginPage: React.FC = () => {
 // --- Telegram Advert Component ---
 const TelegramAdvert: React.FC = () => {
   const [visible, setVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
+    // Only show on dashboard as per user request
+    if (location.pathname !== '/dashboard') {
+      setVisible(false);
+      return;
+    }
+
     const interval = setInterval(() => {
       setVisible(true);
-      setTimeout(() => setVisible(false), 3000);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [location.pathname]);
 
   if (!visible) return null;
 
   return (
-    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[250] animate-in zoom-in-95 duration-300">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 border border-white/20">
-        <i className="fab fa-telegram text-xl"></i>
-        <div className="text-left">
-          <p className="text-[10px] font-black uppercase tracking-widest opacity-80">Join Us</p>
-          <p className="text-xs font-bold">Join our Telegram channel @earnix9ja</p>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[250] flex items-center justify-center p-6 animate-in fade-in zoom-in-95 duration-300">
+      <div className="bg-white rounded-[2.5rem] p-8 w-full max-w-sm shadow-2xl relative overflow-hidden dark:bg-gray-900 border border-purple-100 dark:border-purple-900/30">
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10 text-center">
+          <div className="w-20 h-20 bg-gradient-to-tr from-purple-600 to-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-purple-200 dark:shadow-none rotate-3">
+            <i className="fas fa-bullhorn text-white text-3xl"></i>
+          </div>
+          
+          <h3 className="text-2xl font-black text-gray-800 mb-3 leading-tight dark:text-white">
+            Special Offer! 🚀
+          </h3>
+          
+          <p className="text-gray-600 text-sm font-medium mb-8 leading-relaxed dark:text-gray-400">
+            Register and withdraw free on <span className="text-purple-600 font-bold">earnix9ja</span>. Don't miss out on this opportunity!
+          </p>
+          
+          <div className="space-y-3">
+            <button 
+              onClick={() => {
+                window.open("https://earnix.top", "_blank");
+                setVisible(false);
+              }}
+              className="w-full h-14 bg-purple-600 text-white rounded-2xl text-base font-bold shadow-lg shadow-purple-200 active:scale-95 transition-all flex items-center justify-center space-x-2 dark:shadow-none"
+            >
+              <span>Proceed</span>
+              <i className="fas fa-arrow-right text-xs"></i>
+            </button>
+            
+            <button 
+              onClick={() => setVisible(false)}
+              className="w-full h-12 bg-gray-50 text-gray-400 rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-all dark:bg-gray-800 dark:text-gray-500"
+            >
+              Maybe Later
+            </button>
+          </div>
         </div>
-        <button 
-          onClick={() => window.open("https://t.me/earnix9ja", "_blank")}
-          className="bg-white text-blue-600 px-3 py-1 rounded-lg text-[10px] font-black uppercase ml-2"
-        >
-          JOIN
-        </button>
       </div>
     </div>
   );
