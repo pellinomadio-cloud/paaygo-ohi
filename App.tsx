@@ -1859,7 +1859,42 @@ const TelegramAdvert: React.FC = () => {
   );
 };
 
+// --- Crash Screen Component ---
+const CrashScreen: React.FC = () => {
+  return (
+    <div className="fixed inset-0 bg-green-600 flex flex-col items-center justify-center text-white p-10 text-center z-[9999] overflow-hidden">
+      <div className="animate-bounce mb-8">
+        <i className="fas fa-bomb text-9xl text-yellow-300"></i>
+      </div>
+      <h1 className="text-5xl font-black mb-4 uppercase tracking-tighter animate-pulse">SYSTEM BLOWN UP!</h1>
+      <div className="bg-black/40 p-8 rounded-[2.5rem] backdrop-blur-xl border border-white/20 max-w-md shadow-2xl">
+        <p className="font-mono text-sm leading-relaxed mb-6 text-green-100">
+          FATAL_ERROR: APP_CRASHED_SUCCESSFULLY<br/>
+          STATUS: BLOWN_AWAY<br/>
+          REASON: USER_REQUESTED_CRASH<br/>
+          CODE: 0xGREEN_BLOW
+        </p>
+        <div className="flex items-center justify-center space-x-3">
+          <div className="w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+          <p className="text-[10px] font-bold uppercase tracking-widest opacity-70">Attempting to recover... FAILED</p>
+        </div>
+      </div>
+      <p className="mt-12 text-[10px] font-black opacity-40 uppercase tracking-[0.5em] animate-pulse">PayGo Security Lockdown</p>
+      
+      {/* Glitchy visual elements */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-64 h-64 bg-yellow-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-1 bg-white/20 rotate-45 animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-1 bg-white/20 -rotate-45 animate-pulse delay-500"></div>
+      </div>
+    </div>
+  );
+};
+
 const App: React.FC = () => {
+  const [isCrashed, setIsCrashed] = useState(true); // Always crashed as per request
+
   useEffect(() => {
     // Initial theme check - STRICTLY ensure light mode is default if no preference is set
     // We remove 'dark' class first to avoid system default behavior if Tailwind CDN isn't configured yet
@@ -1874,6 +1909,10 @@ const App: React.FC = () => {
       }
     }
   }, []);
+
+  if (isCrashed) {
+    return <CrashScreen />;
+  }
 
   return (
     <Router>
