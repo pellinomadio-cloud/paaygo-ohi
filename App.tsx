@@ -1539,9 +1539,9 @@ const DashboardPage: React.FC = () => {
         navigate('/upgrade', { state: { name, email } });
       }
     } else if (id === 'group') {
-      window.open("https://t.me/earnix9ja", "_blank");
+      window.open("https://t.me/chix9ja", "_blank");
     } else if (id === 'support') {
-      window.open("https://t.me/magament444489", "_blank");
+      window.open("https://t.me/chix9ja", "_blank");
     }
   };
 
@@ -1700,7 +1700,7 @@ const DashboardPage: React.FC = () => {
       
       {/* WhatsApp Chat Button Floating (matches screenshot) */}
       <button 
-        onClick={() => window.open("https://t.me/magament444489", "_blank")}
+        onClick={() => window.open("https://t.me/chix9ja", "_blank")}
         className="fixed bottom-5 right-5 w-12 h-12 bg-purple-600 text-white rounded-full shadow-2xl flex items-center justify-center z-[50] hover:scale-110 active:scale-95 transition-all"
       >
         <i className="fas fa-comment-dots text-xl"></i>
