@@ -158,6 +158,7 @@ const RegisterPage: React.FC = () => {
           value={formData.name}
           onChange={(e) => setFormData({...formData, name: e.target.value})}
           required
+          className="border-[#ebe8e5]"
         />
         <Input 
           type="email" 
@@ -891,17 +892,17 @@ const UpgradeAccountPage: React.FC = () => {
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
                   <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
-                    1970488193
-                    <button onClick={() => {navigator.clipboard.writeText('1970488193'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                    2086629009
+                    <button onClick={() => {navigator.clipboard.writeText('2086629009'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
                   </p>
                 </div>
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Name</p>
-                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Ohi AYO ABDULSALAM</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">MICHAEL, AYOMIDE</p>
                 </div>
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
-                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Access bank</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">KUDA MFB</p>
                 </div>
               </div>
             </div>
@@ -1113,17 +1114,17 @@ const BuyPayIdPage: React.FC = () => {
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
                 <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
-                  1970488193
-                  <button onClick={() => {navigator.clipboard.writeText('1970488193'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                  2086629009
+                  <button onClick={() => {navigator.clipboard.writeText('2086629009'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
                 </p>
               </div>
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Name</p>
-                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Ohi AYO ABDULSALAM</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">MICHAEL, AYOMIDE</p>
               </div>
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
-                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Access bank</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">KUDA MFB</p>
               </div>
             </div>
           </div>
@@ -1763,6 +1764,7 @@ const LoginPage: React.FC = () => {
           value={formData.email}
           onChange={(e) => setFormData({...formData, email: e.target.value})}
           required
+          className="border-[#ebe8e5]"
         />
         <Input 
           type="password" 
