@@ -264,7 +264,7 @@ const OnboardingWizard: React.FC = () => {
     },
     {
       title: "Get Your PAY ID",
-      text: "To withdraw funds, you'll need to purchase a PAY ID for ₦6,500. This is a one-time purchase that unlocks all features of the app.",
+      text: "To withdraw funds, you'll need to purchase a PAY ID for ₦7,000. This is a one-time purchase that unlocks all features of the app.",
       icon: <i className="fas fa-id-card text-blue-600 text-xl"></i>,
     },
     {
@@ -892,17 +892,17 @@ const UpgradeAccountPage: React.FC = () => {
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
                   <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
-                    6740067845
-                    <button onClick={() => {navigator.clipboard.writeText('6740067845'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                    642 458 8040
+                    <button onClick={() => {navigator.clipboard.writeText('6424588040'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
                   </p>
                 </div>
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Name</p>
-                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Prosper Nelson</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">AWWAL ONIMSI ABDULSALAM</p>
                 </div>
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
-                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Moniepoint MFB</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">OPay</p>
                 </div>
               </div>
             </div>
@@ -1114,17 +1114,17 @@ const BuyPayIdPage: React.FC = () => {
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
                 <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
-                  6740067845
-                  <button onClick={() => {navigator.clipboard.writeText('6740067845'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                  642 458 8040
+                  <button onClick={() => {navigator.clipboard.writeText('6424588040'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
                 </p>
               </div>
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Name</p>
-                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Prosper Nelson</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">AWWAL ONIMSI ABDULSALAM</p>
               </div>
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
-                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Moniepoint MFB</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">OPay</p>
               </div>
             </div>
           </div>
@@ -1212,7 +1212,7 @@ const BuyPayIdPage: React.FC = () => {
           <div className="relative">
             <input 
               readOnly 
-              value="₦6,500" 
+              value="₦7,000" 
               className="w-full h-14 px-6 bg-white rounded-2xl border border-gray-100 text-gray-500 text-sm font-medium shadow-sm outline-none dark:bg-gray-800 dark:border-gray-700"
             />
           </div>
