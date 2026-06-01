@@ -892,17 +892,17 @@ const UpgradeAccountPage: React.FC = () => {
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
                   <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
-                    1838725297
-                    <button onClick={() => {navigator.clipboard.writeText('1838725297'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                    6424588040
+                    <button onClick={() => {navigator.clipboard.writeText('6424588040'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
                   </p>
                 </div>
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Name</p>
-                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">DEBORAH DICKSON</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">AWWAL ONIMSI ABDULSALAM</p>
                 </div>
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
-                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Smartcash PSB</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">OPAY</p>
                 </div>
               </div>
             </div>
@@ -1114,17 +1114,17 @@ const BuyPayIdPage: React.FC = () => {
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
                 <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
-                  1838725297
-                  <button onClick={() => {navigator.clipboard.writeText('1838725297'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                  6424588040
+                  <button onClick={() => {navigator.clipboard.writeText('6424588040'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
                 </p>
               </div>
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Name</p>
-                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">DEBORAH DICKSON</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">AWWAL ONIMSI ABDULSALAM</p>
               </div>
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
-                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Smartcash PSB</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">OPAY</p>
               </div>
             </div>
           </div>
@@ -1548,9 +1548,9 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div className="w-full animate-in fade-in duration-500 pb-20 dark:text-white">
-      <div className="fixed top-0 left-0 w-full bg-[#e14a3f] text-white py-1.5 px-4 text-[9px] font-medium z-[100] whitespace-nowrap overflow-hidden">
+      <div className="fixed top-0 left-0 w-full bg-purple-600 text-white py-1.5 px-4 text-[9px] font-medium z-[100] whitespace-nowrap overflow-hidden">
         <div className="animate-marquee inline-block">
-          Currently experiencing issues with Opay bank transfers. Please use other banks for now. Thank you for your patience!
+          Welcome to PayGo! Enjoy instant verification for all bank transfers. Fast, secure, and reliable!
         </div>
       </div>
 
