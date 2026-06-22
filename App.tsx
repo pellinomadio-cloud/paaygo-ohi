@@ -208,16 +208,61 @@ const WelcomePage: React.FC = () => {
   const location = useLocation();
   const name = location.state?.name || "User";
   const email = location.state?.email || "";
+  const [showTelegramAd, setShowTelegramAd] = useState(true);
 
   return (
     <div className="w-full flex flex-col items-center animate-in zoom-in-95 duration-500">
+      {/* Telegram Channel Registration Advert Modal */}
+      {showTelegramAd && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[250] flex items-center justify-center p-6 animate-in fade-in zoom-in-95 duration-300">
+          <div className="bg-white rounded-[2.5rem] p-8 w-full max-w-sm shadow-2xl relative overflow-hidden dark:bg-gray-900 border border-purple-100 dark:border-purple-900/30">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl"></div>
+            
+            <div className="relative z-10 text-center">
+              <div className="w-20 h-20 bg-gradient-to-tr from-purple-600 to-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-purple-200 dark:shadow-none rotate-3">
+                <i className="fab fa-telegram text-white text-4xl"></i>
+              </div>
+              
+              <h3 className="text-xl font-black text-gray-800 mb-3 leading-tight dark:text-white">
+                Official Telegram 🚀
+              </h3>
+              
+              <p className="text-gray-600 text-sm font-medium mb-6 leading-relaxed dark:text-gray-400">
+                Join our official Telegram community to match with other members, verify payments, and keep up with news!
+              </p>
+              
+              <div className="space-y-3">
+                <button 
+                  onClick={() => {
+                    window.open("https://t.me/legitbusiness2021", "_blank");
+                    setShowTelegramAd(false);
+                  }}
+                  className="w-full h-14 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-2xl text-base font-bold shadow-lg shadow-purple-200 active:scale-95 transition-all flex items-center justify-center space-x-2 dark:shadow-none"
+                >
+                  <i className="fab fa-telegram text-lg"></i>
+                  <span>Join Our Channel</span>
+                </button>
+                
+                <button 
+                  onClick={() => setShowTelegramAd(false)}
+                  className="w-full h-12 bg-gray-50 text-gray-400 rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-all dark:bg-gray-800 dark:text-gray-500"
+                >
+                  Maybe Later
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <PayGoBanner />
       
       <h1 className="text-2xl font-bold text-purple-900 mb-6 text-center leading-tight dark:text-purple-300">
         Welcome to<br />PayGo!
       </h1>
 
-      <div className="w-full bg-white border border-gray-100 rounded-[2rem] p-6 shadow-sm mb-8 text-center dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-full bg-white border border-gray-100 rounded-[2rem] p-6 shadow-sm mb-4 text-center dark:bg-gray-800 dark:border-gray-700">
         <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-400">
           As a new user, you'll receive a generous welcome bonus of
         </p>
@@ -227,6 +272,21 @@ const WelcomePage: React.FC = () => {
         <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-400">
           which can be withdrawn at any time. Yes, you read that right - it's yours to keep!
         </p>
+      </div>
+
+      {/* Embedded Advert element */}
+      <div 
+        onClick={() => window.open("https://t.me/legitbusiness2021", "_blank")}
+        className="w-full cursor-pointer mb-6 p-4 bg-purple-50 hover:bg-purple-100 border border-purple-100 rounded-[1.5rem] flex items-center space-x-3 dark:bg-purple-950/20 dark:border-purple-900/30 transition-all shadow-sm active:scale-[0.98]"
+      >
+        <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-md shadow-purple-100 dark:shadow-none animate-bounce">
+          <i className="fab fa-telegram text-lg"></i>
+        </div>
+        <div className="text-left flex-1 min-w-0">
+          <p className="text-[10px] uppercase font-bold text-purple-700 dark:text-purple-300 tracking-wider">Official Telegram Channel</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 font-medium truncate">Click to join for guides & proof of payments!</p>
+        </div>
+        <i className="fas fa-chevron-right text-purple-400 text-xs"></i>
       </div>
 
       <button 
