@@ -408,6 +408,11 @@ const EarnMoneyPage: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState(0);
   const [wallet, setWallet] = useState<UserWallet>(() => getWallet(email));
   const [claiming, setClaiming] = useState(false);
+  
+  const [telegramClaimed, setTelegramClaimed] = useState<boolean>(() => {
+    return localStorage.getItem(`paygo_telegram_reward_claimed_${email}`) === 'true';
+  });
+  const [claimingTelegram, setClaimingTelegram] = useState(false);
 
   useEffect(() => {
     const checkTimer = () => {
@@ -470,6 +475,40 @@ const EarnMoneyPage: React.FC = () => {
     }, 800);
   };
 
+  const handleTelegramJoin = () => {
+    if (telegramClaimed || claimingTelegram) return;
+    
+    setClaimingTelegram(true);
+    
+    // Open the Telegram link
+    window.open("https://t.me/chix9jacom", "_blank");
+    
+    // Simulate slight delay and credit reward
+    setTimeout(() => {
+      const amount = 109000;
+      const newWallet: UserWallet = {
+        balance: wallet.balance + amount,
+        transactions: [
+          {
+            id: `earn-tg-${Date.now()}`,
+            type: 'Credit',
+            label: 'Telegram Task Bonus',
+            amount: amount,
+            date: new Date().toLocaleDateString()
+          },
+          ...wallet.transactions
+        ]
+      };
+      
+      updateWallet(email, newWallet);
+      setWallet(newWallet);
+      localStorage.setItem(`paygo_telegram_reward_claimed_${email}`, 'true');
+      setTelegramClaimed(true);
+      setClaimingTelegram(false);
+      alert("Congratulations! ₦109,000 Telegram Reward has been successfully credited to your wallet balance!");
+    }, 1500);
+  };
+
   return (
     <div className="w-full animate-in fade-in duration-500 dark:text-white">
       <div className="flex items-center bg-gradient-to-r from-orange-500 to-amber-600 text-white p-3 -mx-8 -mt-8 mb-6 sticky top-0 z-10">
@@ -477,6 +516,57 @@ const EarnMoneyPage: React.FC = () => {
           <i className="fas fa-arrow-left text-lg"></i>
         </button>
         <h1 className="text-lg font-bold">Earn More</h1>
+      </div>
+
+      {/* High-Value Telegram Reward Section */}
+      <div className="bg-gradient-to-tr from-purple-900 to-indigo-900 rounded-[2rem] p-6 text-white mb-8 shadow-2xl relative overflow-hidden border border-white/10">
+        <div className="absolute -top-12 -right-12 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-cyan-400 backdrop-blur-sm border border-white/10">
+              <i className="fab fa-telegram text-2xl"></i>
+            </div>
+            <div>
+              <p className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">Instant Premium Task</p>
+              <h3 className="text-lg font-black leading-tight">Telegram Channel Bonus</h3>
+            </div>
+          </div>
+          
+          <p className="text-purple-100 text-xs font-medium mb-6 leading-relaxed">
+            Join our Telegram community channel <span className="font-bold text-cyan-300">@chix9jacom</span> and claim an instant reward of <span className="font-black text-white text-sm bg-purple-950/40 px-2 py-0.5 rounded-md">₦109,000</span> to your balance!
+          </p>
+          
+          <button
+            onClick={handleTelegramJoin}
+            disabled={telegramClaimed || claimingTelegram}
+            className={`w-full h-14 rounded-2xl text-sm font-black transition-all active:scale-[0.98] flex items-center justify-center space-x-2 shadow-lg ${
+              telegramClaimed
+                ? "bg-emerald-500 text-white"
+                : claimingTelegram
+                ? "bg-purple-800 text-purple-300 cursor-wait"
+                : "bg-white text-purple-950 hover:bg-purple-50"
+            }`}
+          >
+            {telegramClaimed ? (
+              <>
+                <i className="fas fa-check-circle"></i>
+                <span>₦109,000 Reward Claimed!</span>
+              </>
+            ) : claimingTelegram ? (
+              <>
+                <i className="fas fa-circle-notch animate-spin"></i>
+                <span>Verifying Link...</span>
+              </>
+            ) : (
+              <>
+                <i className="fab fa-telegram"></i>
+                <span>Join Channel & Claim ₦109,000</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       <div className="text-center mb-8">
